@@ -1,0 +1,6 @@
+.font-bold {
+  font-weight: bold;
+}
+.text-sm {
+  font-size: var(--font-size-sm);
+}

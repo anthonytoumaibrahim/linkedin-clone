@@ -2,8 +2,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 64px;
+  min-height: 80px;
+  margin-bottom: 40px;
 }
 .site-header img {
   max-width: 132px;
+}
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }

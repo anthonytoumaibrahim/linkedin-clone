@@ -1,0 +1,35 @@
+.button {
+  border: 1px solid;
+  padding: 14px 24px;
+  border-radius: 60px;
+  cursor: pointer;
+  font-weight: 500;
+  outline: none;
+}
+.button-outlined {
+  border-color: var(--secondary-col);
+  background-color: transparent;
+  color: var(--secondary-col);
+}
+.button-outlined-primary {
+  border-color: var(--primary-col);
+  color: var(--primary-col);
+}
+.button-outlined:hover {
+  background-color: var(--primary-lightest-col);
+}
+.button-transparent {
+  background-color: transparent;
+  border-color: transparent;
+}
+.button-transparent:hover {
+  background-color: var(--secondary-lightest-col);
+}
+.button-primary {
+  background-color: var(--primary-col);
+  color: #fff;
+  border-color: transparent;
+}
+.button-primary:hover {
+  background-color: var(--primary-dark-col);
+}

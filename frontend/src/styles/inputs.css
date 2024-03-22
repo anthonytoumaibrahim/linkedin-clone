@@ -1,0 +1,19 @@
+.form-input {
+  background-color: #fff;
+  border: 1px solid var(--secondary-col);
+  border-radius: 5px;
+  padding: 15px 20px;
+}
+.form-input:hover,
+.form-input:focus {
+  background-color: var(--secondary-lightest-col);
+  outline: 1.75px solid var(--secondary-col);
+}
+.form-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.form-input-wrapper label {
+  font-weight: 500;
+}

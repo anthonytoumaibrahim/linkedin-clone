@@ -1,10 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
 
 :root {
+  --primary-darker-col: #04294e;
+  --primary-dark-col: #074788;
   --primary-col: #0a66c2;
   --primary-light-col: #5494d4;
   --primary-lighter-col: #9dc2e7;
   --primary-lightest-col: #e7f0f9;
+
+  --secondary-col: #1e293b;
+  --secondary-light-col: #626976;
+  --secondary-lighter-col: #a5a9b1;
+  --secondary-lightest-col: #f5f5f5;
 
   --font-size-sm: 0.875rem;
   --font-size-base: 1rem;
@@ -28,9 +35,11 @@
   font-size: var(--font-size-base);
   line-height: var(--line-height-base);
 }
-
-body {
-  background-color: var(--primary-lightest-col);
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 500;
 }
 h1 {
   font-size: var(--font-size-3xl);
@@ -52,8 +61,13 @@ a {
   text-decoration: none;
   color: var(--primary-col);
 }
+a:hover {
+  color: var(--primary-dark-col);
+  text-decoration: underline;
+}
 .container {
   width: 100%;
+  max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
   padding-left: 26px;

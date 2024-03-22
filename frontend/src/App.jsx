@@ -4,6 +4,7 @@ import "./styles/utilities.css";
 import "./styles/colors.css";
 import "./styles/header.css";
 import "./styles/buttons.css";
+import "./styles/inputs.css";
 
 // Assets
 import logo from "./assets/images/logo.svg";
@@ -23,6 +24,10 @@ const App = () => {
           <a href="/">Home</a>
           <a href="/">About</a>
           <a href="/">Company</a>
+          <button className="button button-transparent">Join now</button>
+          <button className="button button-outlined button-outlined-primary">
+            Sign in
+          </button>
         </nav>
       </header>
       <BrowserRouter>

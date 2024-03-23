@@ -24,7 +24,7 @@ const Skills = ({ selected_skills = [], update_skills = () => {} }) => {
         <button
           key={index}
           type="button"
-          className={`button button-outlined button-small button-outlined-primary ${
+          className={`button button-outlined button-small ${
             selected_skills.includes(skill) ? "button-primary" : ""
           }`}
           onClick={() => update_skills(skill)}

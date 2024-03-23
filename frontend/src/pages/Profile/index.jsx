@@ -57,35 +57,79 @@ const Profile = () => {
       <div className="profile-cover">
         <img
           src={
-            shownProfile.is_company ? profile_cover_company : profile_cover_user
+            shownProfile?.is_company
+              ? profile_cover_company
+              : profile_cover_user
           }
         />
         <div className="profile-image">
-          <img src={shownProfile.is_company ? avatar_company : avatar_user} />
+          <img src={shownProfile?.is_company ? avatar_company : avatar_user} />
         </div>
       </div>
 
       <div className="profile-content">
         <h1>
-          {shownProfile.name ? shownProfile.name : "Anonymous"}{" "}
+          {shownProfile?.name ? shownProfile?.name : "Anonymous"}{" "}
           {isOwner && (
             <Link to="/edit-profile">
               <CiEdit /> Edit Profile
             </Link>
           )}
         </h1>
-        <h4>{shownProfile.is_company ? "Company" : "User"}</h4>
+        <h4>{shownProfile?.is_company ? "Company" : "User"}</h4>
 
-        <div className="biography margin-y">
-          <h4>Biography</h4>
-          <p className={`${shownProfile.biography ? "" : "text-muted italic"}`}>
-            {shownProfile.biography ?? (
-              <>
-                This {shownProfile.is_company ? "company" : "user"} did not
-                write their biography yet.
-              </>
-            )}
-          </p>
+        <div
+          className={`margin-y ${
+            shownProfile?.is_company ? "" : "bio-and-skills"
+          }`}
+        >
+          <div className="biography">
+            <h4>{shownProfile?.is_company ? "About Company" : "Biography"}</h4>
+            <p
+              className={`${
+                shownProfile?.biography ? "" : "text-muted italic"
+              }`}
+            >
+              {shownProfile?.biography ?? (
+                <>
+                  This {shownProfile?.is_company ? "company" : "user"} did not
+                  write their biography yet.
+                </>
+              )}
+            </p>
+          </div>
+          {!shownProfile?.is_company && (
+            <div>
+              <div className="margin-b">
+                <h4>Skills</h4>
+                {shownProfile?.skills?.length > 0 ? (
+                  <div className="skills">
+                    {shownProfile?.skills?.map((skill, index) => (
+                      <span key={index}>{skill}</span>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-muted italic">No skills to show.</p>
+                )}
+              </div>
+              <div>
+                <h4>Education</h4>
+                {shownProfile?.education?.school ? (
+                  <p>
+                    <span className="font-bold">
+                      {shownProfile?.education?.school}
+                    </span>{" "}
+                    ({shownProfile?.education?.start_year}-
+                    {shownProfile?.education?.end_year})
+                    <br />
+                    {shownProfile?.education?.field}
+                  </p>
+                ) : (
+                  <p className="text-muted italic">No education to show.</p>
+                )}
+              </div>
+            </div>
+          )}
         </div>
 
         {isOwner && <NewPost />}

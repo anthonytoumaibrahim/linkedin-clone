@@ -19,6 +19,9 @@
   background-color: transparent;
   color: var(--secondary-col);
 }
+.button-outlined:hover {
+  background-color: var(--secondary-lightest-col);
+}
 .button-outlined-primary {
   border-color: var(--primary-col);
   color: var(--primary-col);

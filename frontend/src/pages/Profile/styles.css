@@ -34,3 +34,18 @@
 .biography p {
   white-space: pre-line;
 }
+.bio-and-skills {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.skills {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+.skills span {
+  padding: 2px 8px;
+  border: 1px solid;
+  border-radius: 15px;
+  font-size: 0.875rem;
+}

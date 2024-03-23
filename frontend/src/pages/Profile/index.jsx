@@ -1,6 +1,6 @@
 // React stuff
 import { useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import axios from "axios";
 
 // Context
@@ -18,6 +18,9 @@ import "./styles.css";
 // Components
 import NewPost from "./components/NewPost";
 
+// Icons
+import { CiEdit } from "react-icons/ci";
+
 const Profile = () => {
   const navigate = useNavigate();
   const { user, setUser } = useContext(AuthContext);
@@ -34,6 +37,7 @@ const Profile = () => {
 
   // Get shown profile
   useEffect(() => {
+    if (!shownId) shownId = user.id;
     axios
       .get(
         process.env.REACT_APP_API_URL + "/profile/getProfile.php?id=" + shownId
@@ -46,28 +50,31 @@ const Profile = () => {
       });
   }, []);
   return (
-    <>
-      <div className="profile-card">
-        <div className="profile-cover">
-          <img
-            src={
-              shownProfile.is_company
-                ? profile_cover_company
-                : profile_cover_user
-            }
-          />
-          <div className="profile-image">
-            <img src={shownProfile.is_company ? avatar_company : avatar_user} />
-          </div>
-        </div>
-
-        <div className="profile-content">
-          <h1>{shownProfile.name ? shownProfile.name : "Anonymous"}</h1>
-          <h4>{shownProfile.is_company ? "Company" : "User"}</h4>
-          {shownProfile.id === user.id && <NewPost />}
+    <div className="profile-card">
+      <div className="profile-cover">
+        <img
+          src={
+            shownProfile.is_company ? profile_cover_company : profile_cover_user
+          }
+        />
+        <div className="profile-image">
+          <img src={shownProfile.is_company ? avatar_company : avatar_user} />
         </div>
       </div>
-    </>
+
+      <div className="profile-content">
+        <h1>
+          {shownProfile.name ? shownProfile.name : "Anonymous"}{" "}
+          {shownProfile.id === user.id && (
+            <Link to="/edit-profile">
+              <CiEdit /> Edit Profile
+            </Link>
+          )}
+        </h1>
+        <h4>{shownProfile.is_company ? "Company" : "User"}</h4>
+        {shownProfile.id === user.id && <NewPost />}
+      </div>
+    </div>
   );
 };
 

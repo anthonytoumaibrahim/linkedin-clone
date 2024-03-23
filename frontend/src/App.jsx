@@ -22,6 +22,7 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Authentication from "./pages/Authentication";
 import Homepage from "./pages/Homepage";
 import Profile from "./pages/Profile";
+import ProfileEditor from "./pages/ProfileEditor";
 
 // Utilities
 import { getLocalUser, removeLocalUser } from "./utils/user";
@@ -80,7 +81,8 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Homepage />} />
             <Route path="/auth" element={<Authentication />} />
-            <Route path="/profile/:shownId" element={<Profile />} />
+            <Route path="/profile/:shownId?" element={<Profile />} />
+            <Route path="/edit-profile" element={<ProfileEditor />} />
           </Routes>
         </main>
       </BrowserRouter>

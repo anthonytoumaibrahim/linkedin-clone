@@ -13,6 +13,12 @@
   --secondary-lighter-col: #a5a9b1;
   --secondary-lightest-col: #f5f5f5;
 
+  --error-col: #dc2626;
+  --error-light-col: #fee2e2;
+
+  --success-col: #059669;
+  --success-light-col: #d1fae5;
+
   --font-size-sm: 0.875rem;
   --font-size-base: 1rem;
   --font-size-lg: 1.125rem;

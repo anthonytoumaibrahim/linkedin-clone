@@ -1,0 +1,8 @@
+.form-check-wrapper label {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.form-check-wrapper label {
+  font-weight: 500;
+}

@@ -17,3 +17,11 @@
 .form-input-wrapper label {
   font-weight: 500;
 }
+.form-error label {
+  color: var(--error-col);
+  font-weight: 600;
+}
+.form-error .form-input {
+  border-color: var(--error-col);
+  background-color: var(--error-light-col);
+}

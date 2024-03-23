@@ -7,6 +7,10 @@
   outline: none;
   text-decoration: none !important;
 }
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 .button-outlined {
   border-color: var(--secondary-col);
   background-color: transparent;
@@ -16,7 +20,7 @@
   border-color: var(--primary-col);
   color: var(--primary-col);
 }
-.button-outlined:hover {
+.button-outlined:not(:disabled):hover {
   background-color: var(--primary-lightest-col);
 }
 .button-transparent {
@@ -24,7 +28,7 @@
   border-color: transparent;
   color: #333333 !important;
 }
-.button-transparent:hover {
+.button-transparent:not(:disabled):hover {
   background-color: var(--secondary-lightest-col);
 }
 .button-primary {
@@ -32,6 +36,6 @@
   color: #fff;
   border-color: transparent;
 }
-.button-primary:hover {
+.button-primary:not(:disabled):hover {
   background-color: var(--primary-dark-col);
 }

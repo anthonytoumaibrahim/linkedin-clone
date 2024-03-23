@@ -14,7 +14,7 @@ if (strlen($password) < 8) {
 }
 
 // Check if user exists
-$check_query = $mysqli->prepare("SELECT id, email, password FROM users WHERE email=?");
+$check_query = $mysqli->prepare("SELECT id, name, email, password, is_company FROM users WHERE email=?");
 $check_query->bind_param("s", $email);
 $check_query->execute();
 $check_query->store_result();
@@ -24,7 +24,7 @@ if ($num === 0) {
   exit(response(false, "This account doesn't exist."));
 }
 
-$check_query->bind_result($id, $email, $hashed_password);
+$check_query->bind_result($id, $name, $email, $hashed_password, $is_company);
 $check_query->fetch();
 
 if (!password_verify($password, $hashed_password)) {
@@ -32,5 +32,8 @@ if (!password_verify($password, $hashed_password)) {
 }
 
 echo response(true, "You have successfully logged in.", [
-  'id' => $id
+  'id' => $id,
+  'name' => $name,
+  'email' => $email,
+  'is_company' => $is_company
 ]);

@@ -1,8 +1,5 @@
 import { createContext } from "react";
 
-const AuthContext = createContext({
-  id: 0,
-  setId: () => {}
-});
+const AuthContext = createContext({});
 
 export { AuthContext };

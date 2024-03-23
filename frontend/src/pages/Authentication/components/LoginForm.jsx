@@ -39,8 +39,14 @@ const LoginForm = () => {
           message: message,
         });
         if (success) {
-          setUser(data.id);
-          setLocalUser(data.id, data.name, data.email);
+          setUser({
+            ...user,
+            id: data.id,
+            name: data.name,
+            email: data.email,
+            is_company: data.is_company
+          });
+          setLocalUser(data.id, data.name, data.email, data.is_company);
           return navigate("/");
         }
       })

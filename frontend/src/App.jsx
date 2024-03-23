@@ -21,13 +21,18 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 // Pages
 import Authentication from "./pages/Authentication";
 import Homepage from "./pages/Homepage";
+import Profile from "./pages/Profile";
 
 // Utilities
-import { getLocalUser } from "./utils/user";
+import { getLocalUser, removeLocalUser } from "./utils/user";
 
 const App = () => {
+  const localUser = getLocalUser();
   const [user, setUser] = useState({
-    id: getLocalUser() ? getLocalUser().id : 0,
+    id: localUser ? localUser.id : 0,
+    name: localUser.name ?? "",
+    email: localUser.email ?? "",
+    is_company: localUser.is_company ?? false,
   });
 
   return (
@@ -36,22 +41,34 @@ const App = () => {
         <header className="site-header container">
           <img src={logo} alt="LinkedIn" />
           <nav className="site-nav">
-            <a href="/">Home</a>
-            <a href="/">About</a>
-            <a href="/">Company</a>
             {user.id !== 0 ? (
-              ""
+              <>
+                <Link to="/">Home</Link>
+                <Link to="/profile">Profile</Link>
+                <Link
+                  className="button button-outlined button-outlined-error"
+                  to="/auth"
+                  onClick={() => {
+                    setUser({
+                      id: 0,
+                    });
+                    removeLocalUser();
+                  }}
+                >
+                  Log out
+                </Link>
+              </>
             ) : (
               <>
                 <Link
                   className="button button-transparent"
-                  to="auth?authType=signup"
+                  to="/auth?authType=signup"
                 >
                   Join now
                 </Link>
                 <Link
                   className="button button-outlined button-outlined-primary"
-                  to="auth"
+                  to="/auth"
                 >
                   Sign in
                 </Link>
@@ -63,6 +80,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Homepage />} />
             <Route path="/auth" element={<Authentication />} />
+            <Route path="/profile" element={<Profile />} />
           </Routes>
         </main>
       </BrowserRouter>

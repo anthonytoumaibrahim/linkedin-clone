@@ -1,8 +1,9 @@
-const setLocalUser = (id, name = "", email = "") => {
+const setLocalUser = (id, name = "", email = "", is_company = false) => {
   localStorage.user = JSON.stringify({
     id: id,
     name: name,
     email: email,
+    is_company: is_company,
   });
 };
 const getLocalUser = () => {
@@ -16,4 +17,4 @@ const removeLocalUser = () => {
   localStorage.removeItem("user");
 };
 
-export { setLocalUser, getLocalUser };
+export { setLocalUser, getLocalUser, removeLocalUser };

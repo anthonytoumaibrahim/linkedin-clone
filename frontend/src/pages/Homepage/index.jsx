@@ -5,6 +5,9 @@ import { useNavigate } from "react-router-dom";
 // Context
 import { AuthContext } from "../../context/AuthContext";
 
+// Styles
+import "./styles.css";
+
 const Homepage = () => {
   const navigate = useNavigate();
   const { user, setUser } = useContext(AuthContext);
@@ -15,7 +18,11 @@ const Homepage = () => {
     }
   }, [user]);
 
-  return <div>index</div>;
+  return (
+    <>
+      <div className="create-post-container"></div>
+    </>
+  );
 };
 
 export default Homepage;

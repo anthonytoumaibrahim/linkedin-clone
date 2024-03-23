@@ -20,8 +20,15 @@
   border-color: var(--primary-col);
   color: var(--primary-col);
 }
-.button-outlined:not(:disabled):hover {
+.button-outlined-primary:not(:disabled):hover {
   background-color: var(--primary-lightest-col);
+}
+.button-outlined-error {
+  border-color: var(--error-col);
+  color: var(--error-col) !important;
+}
+.button-outlined-error:not(:disabled):hover {
+  background-color: var(--error-light-col);
 }
 .button-transparent {
   background-color: transparent;

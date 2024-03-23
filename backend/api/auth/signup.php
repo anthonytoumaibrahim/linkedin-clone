@@ -44,5 +44,8 @@ if ($row === -1) {
 $id = $create_query->insert_id;
 
 echo response(true, "Your account has been successfully created!", [
-  'id' => $id
+  'id' => $id,
+  'name' => $name,
+  'email' => $email,
+  'is_company' => $isCompany
 ]);

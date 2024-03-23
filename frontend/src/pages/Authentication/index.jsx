@@ -1,6 +1,6 @@
 // React stuff
-import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useEffect, useState, useContext } from "react";
+import { useSearchParams, useNavigate } from "react-router-dom";
 
 // Assets
 import authImg from "../../assets/images/auth_image.svg";
@@ -12,9 +12,21 @@ import "./styles.css";
 import LoginForm from "./components/LoginForm";
 import SignupForm from "./components/SignupForm";
 
+// Context
+import { AuthContext } from "../../context/AuthContext";
+
 const Authentication = () => {
+  const navigate = useNavigate();
+  const { user, setUser } = useContext(AuthContext);
   const [searchParams, setSearchParams] = useSearchParams();
   const [isLogin, setIsLogin] = useState(true);
+
+  // If user is logged in, redirect
+  useEffect(() => {
+    if (user.id !== 0) {
+      navigate("/");
+    }
+  }, [user]);
 
   useEffect(() => {
     const authType = searchParams.get("authType");

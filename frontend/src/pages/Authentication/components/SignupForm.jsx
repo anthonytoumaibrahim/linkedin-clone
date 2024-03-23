@@ -1,15 +1,17 @@
 // React stuff
-import { useEffect, useState, useRef } from "react";
-import { redirect } from "react-router-dom";
+import { useEffect, useState, useRef, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 // Components
 import Checkbox from "../../../components/Checkbox";
 
-// Utilities
-import { setLoggedInUser } from "../utils";
+// Context
+import { AuthContext } from "../../../context/AuthContext";
 
 const SignupForm = () => {
+  const { user, setUser } = useContext(AuthContext);
+  const navigate = useNavigate();
   const button = useRef(null);
   const [isCompany, setIsCompany] = useState(false);
 
@@ -83,7 +85,7 @@ const SignupForm = () => {
     }
     button.current.disabled = true;
     axios
-      .post(process.env.REACT_APP_API_URL + "/signup.php", requestData)
+      .post(process.env.REACT_APP_API_URL + "/auth/signup.php", requestData)
       .then((response) => {
         const { success, message, data } = response.data;
         setResponse({
@@ -91,8 +93,9 @@ const SignupForm = () => {
           message: message,
         });
         if (success) {
-          setLoggedInUser(data.id);
-          return redirect("/");
+          setUser(data.id);
+          localStorage.userId = data.id;
+          return navigate("/");
         }
       })
       .catch((error) => {

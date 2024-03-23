@@ -6,6 +6,9 @@ import axios from "axios";
 // Context
 import { AuthContext } from "../../../context/AuthContext";
 
+// Utilities
+import { setLocalUser } from "../../../utils/user";
+
 const LoginForm = () => {
   const { user, setUser } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -37,7 +40,7 @@ const LoginForm = () => {
         });
         if (success) {
           setUser(data.id);
-          localStorage.userId = data.id;
+          setLocalUser(data.id, data.name, data.email);
           return navigate("/");
         }
       })

@@ -20,44 +20,48 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 // Pages
 import Authentication from "./pages/Authentication";
+import Homepage from "./pages/Homepage";
+
+// Utilities
+import { getLocalUser } from "./utils/user";
 
 const App = () => {
   const [user, setUser] = useState({
-    id: parseInt(localStorage.userId ?? 0),
+    id: getLocalUser() ? getLocalUser().id : 0,
   });
 
   return (
     <AuthContext.Provider value={{ user, setUser }}>
       <BrowserRouter>
+        <header className="site-header container">
+          <img src={logo} alt="LinkedIn" />
+          <nav className="site-nav">
+            <a href="/">Home</a>
+            <a href="/">About</a>
+            <a href="/">Company</a>
+            {user.id !== 0 ? (
+              ""
+            ) : (
+              <>
+                <Link
+                  className="button button-transparent"
+                  to="auth?authType=signup"
+                >
+                  Join now
+                </Link>
+                <Link
+                  className="button button-outlined button-outlined-primary"
+                  to="auth"
+                >
+                  Sign in
+                </Link>
+              </>
+            )}
+          </nav>
+        </header>
         <main className="container">
-          <header className="site-header">
-            <img src={logo} alt="LinkedIn" />
-            <nav className="site-nav">
-              <a href="/">Home</a>
-              <a href="/">About</a>
-              <a href="/">Company</a>
-              {user.id !== 0 ? (
-                ""
-              ) : (
-                <>
-                  <Link
-                    className="button button-transparent"
-                    to="auth?authType=signup"
-                  >
-                    Join now
-                  </Link>
-                  <Link
-                    className="button button-outlined button-outlined-primary"
-                    to="auth"
-                  >
-                    Sign in
-                  </Link>
-                </>
-              )}
-            </nav>
-          </header>
           <Routes>
-            <Route path="/" element={<>Hello World!</>} />
+            <Route path="/" element={<Homepage />} />
             <Route path="/auth" element={<Authentication />} />
           </Routes>
         </main>

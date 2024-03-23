@@ -9,6 +9,9 @@ import Checkbox from "../../../components/Checkbox";
 // Context
 import { AuthContext } from "../../../context/AuthContext";
 
+// Utilities
+import { setLocalUser } from "../../../utils/user";
+
 const SignupForm = () => {
   const { user, setUser } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -94,7 +97,7 @@ const SignupForm = () => {
         });
         if (success) {
           setUser(data.id);
-          localStorage.userId = data.id;
+          setLocalUser(data.id, data.name, data.email);
           return navigate("/");
         }
       })

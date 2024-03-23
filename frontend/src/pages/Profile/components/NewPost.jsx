@@ -5,8 +5,7 @@ const NewPost = () => {
       <form action="">
         <div className="form-input-wrapper margin-b">
           <textarea
-            cols="30"
-            rows="10"
+            rows="5"
             className="form-input"
             placeholder="What do you want to talk about?"
           ></textarea>

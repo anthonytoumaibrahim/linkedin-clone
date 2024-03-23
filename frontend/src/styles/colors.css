@@ -7,3 +7,6 @@
 .text-success {
   color: var(--success-col);
 }
+.text-muted {
+  color: #a6a6a6;
+}

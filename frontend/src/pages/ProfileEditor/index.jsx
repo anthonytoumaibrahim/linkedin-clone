@@ -12,6 +12,9 @@ import { FaRegEye } from "react-icons/fa";
 // Styles
 import "./styles.css";
 
+// Components
+import Skills from "./Components/Skills";
+
 const ProfileEditor = () => {
   const navigate = useNavigate();
   const { user, setUser } = useContext(AuthContext);
@@ -24,6 +27,8 @@ const ProfileEditor = () => {
   const [userInfo, setUserInfo] = useState({
     name: "",
     bio: "",
+    education: [],
+    skills: [],
   });
   const [response, setResponse] = useState({
     success: false,
@@ -41,6 +46,8 @@ const ProfileEditor = () => {
           ...userInfo,
           name: data.name ?? "",
           bio: data.biography ?? "",
+          education: data.education ?? [],
+          skills: data.skills ?? [],
         });
       })
       .catch((error) => console.error(error));
@@ -105,6 +112,25 @@ const ProfileEditor = () => {
             }
           ></textarea>
         </div>
+        <div className="form-input-wrapper margin-b">
+          <label>Skills</label>
+          <Skills
+            selected_skills={userInfo.skills}
+            update_skills={(skill) => {
+              if (userInfo.skills.includes(skill)) {
+                setUserInfo({
+                  ...userInfo,
+                  skills: [...userInfo.skills].filter((sk) => sk !== skill),
+                });
+                return;
+              }
+              setUserInfo({
+                ...userInfo,
+                skills: [...userInfo.skills, skill],
+              });
+            }}
+          />
+        </div>
         {response.message !== "" ? (
           <p
             className={`margin-b ${
@@ -117,7 +143,9 @@ const ProfileEditor = () => {
           ""
         )}
         <div className="save-container">
-          <button className="button button-primary">Save profile</button>{" "}
+          <button className="button button-primary" type="submit">
+            Save profile
+          </button>{" "}
           <Link to="/profile" target="_blank">
             <FaRegEye /> View profile
           </Link>

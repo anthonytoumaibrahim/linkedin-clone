@@ -7,6 +7,9 @@
   outline: none;
   text-decoration: none !important;
 }
+.button-small {
+  padding: 8px 16px;
+}
 .button:disabled {
   opacity: 0.5;
   cursor: not-allowed;

@@ -6,9 +6,11 @@ $data = jsonPost();
 $id = $data['id'] ?? 0;
 $name = $data['name'] ?? "";
 $bio = $data['bio'] ?? "";
+$education = json_encode($data['education'] ?? []);
+$skills = json_encode($data['skills'] ?? []);
 
-$query = $mysqli->prepare("UPDATE users SET name = ?, biography = ? WHERE id = ?");
-$query->bind_param("ssi", $name, $bio, $id);
+$query = $mysqli->prepare("UPDATE users SET name = ?, biography = ?, education = ?, skills = ? WHERE id = ?");
+$query->bind_param("ssssi", $name, $bio, $education, $skills, $id);
 $query->execute();
 $query->store_result();
 

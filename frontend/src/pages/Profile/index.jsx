@@ -35,9 +35,12 @@ const Profile = () => {
 
   let { shownId } = useParams();
 
+  const [isOwner, setIsOwner] = useState(false);
+
   // Get shown profile
   useEffect(() => {
     if (!shownId) shownId = user.id;
+    setIsOwner(shownId === user.id ? true : false);
     axios
       .get(
         process.env.REACT_APP_API_URL + "/profile/getProfile.php?id=" + shownId
@@ -65,14 +68,27 @@ const Profile = () => {
       <div className="profile-content">
         <h1>
           {shownProfile.name ? shownProfile.name : "Anonymous"}{" "}
-          {shownProfile.id === user.id && (
+          {isOwner && (
             <Link to="/edit-profile">
               <CiEdit /> Edit Profile
             </Link>
           )}
         </h1>
         <h4>{shownProfile.is_company ? "Company" : "User"}</h4>
-        {shownProfile.id === user.id && <NewPost />}
+
+        <div className="biography margin-y">
+          <h4>Biography</h4>
+          <p className={`${shownProfile.biography ? "" : "text-muted italic"}`}>
+            {shownProfile.biography ?? (
+              <>
+                This {shownProfile.is_company ? "company" : "user"} did not
+                write their biography yet.
+              </>
+            )}
+          </p>
+        </div>
+
+        {isOwner && <NewPost />}
       </div>
     </div>
   );

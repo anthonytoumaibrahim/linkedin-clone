@@ -14,3 +14,10 @@
 .w-full {
   width: 100%;
 }
+.margin-y {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.margin-b {
+  margin-bottom: 20px;
+}

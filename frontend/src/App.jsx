@@ -80,7 +80,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Homepage />} />
             <Route path="/auth" element={<Authentication />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile/:shownId" element={<Profile />} />
           </Routes>
         </main>
       </BrowserRouter>

@@ -5,6 +5,7 @@
   cursor: pointer;
   font-weight: 500;
   outline: none;
+  text-decoration: none !important;
 }
 .button-outlined {
   border-color: var(--secondary-col);
@@ -21,6 +22,7 @@
 .button-transparent {
   background-color: transparent;
   border-color: transparent;
+  color: #333333 !important;
 }
 .button-transparent:hover {
   background-color: var(--secondary-lightest-col);

@@ -16,6 +16,9 @@ import "./styles.css";
 import Skills from "./Components/Skills";
 import Education from "./Components/Education";
 
+// Utils
+import { setLocalUser } from "../../utils/user";
+
 const ProfileEditor = () => {
   const navigate = useNavigate();
   const { user, setUser } = useContext(AuthContext);
@@ -69,6 +72,14 @@ const ProfileEditor = () => {
           success: success,
           message: message,
         });
+        setUser({
+          ...user,
+          id: user.id,
+          name: userInfo.name,
+          email: user.email,
+          is_company: userInfo.is_company,
+        });
+        setLocalUser(user.id, userInfo.name, user.email, userInfo.is_company);
       })
       .catch((error) => {
         setResponse({

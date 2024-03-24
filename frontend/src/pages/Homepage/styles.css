@@ -32,3 +32,25 @@
   font-size: 0.875rem;
   color: var(--secondary-light-col);
 }
+.discover-section {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+.users {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.users .user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #333;
+}
+.users .button {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}

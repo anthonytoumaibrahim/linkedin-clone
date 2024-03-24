@@ -104,7 +104,7 @@ const SignupForm = () => {
             is_company: data.is_company,
           });
           setLocalUser(data.id, data.name, data.email, data.is_company);
-          return navigate("/");
+          return navigate("/profile");
         }
       })
       .catch((error) => {

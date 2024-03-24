@@ -18,6 +18,7 @@ import Avatar from "../../components/Avatar";
 
 // Icons
 import { CiEdit } from "react-icons/ci";
+import { FaUserPlus } from "react-icons/fa";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -66,10 +67,14 @@ const Profile = () => {
       <div className="profile-content">
         <h1>
           {shownProfile?.name ? shownProfile?.name : "Anonymous"}{" "}
-          {isOwner && (
+          {isOwner ? (
             <Link to="/edit-profile">
               <CiEdit /> Edit Profile
             </Link>
+          ) : (
+            <button className="button button-primary button-small follow-button">
+              <FaUserPlus /> Follow
+            </button>
           )}
         </h1>
         <h4>{shownProfile?.is_company ? "Company" : "User"}</h4>

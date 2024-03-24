@@ -31,13 +31,36 @@ const Homepage = () => {
   // Get posts
   useEffect(() => {
     axios
-      .get(process.env.REACT_APP_API_URL + "/post/get.php")
+      .get(process.env.REACT_APP_API_URL + "/post/get.php?id=" + user.id)
       .then((response) => {
         setPosts(response.data.data.posts);
         setUsers(response.data.data.users);
       })
       .catch((err) => console.log(err));
   }, []);
+
+  const follow = (id) => {
+    axios
+      .post(process.env.REACT_APP_API_URL + "/profile/follow.php", {
+        id: user.id,
+        follow_id: id,
+      })
+      .then((response) => {
+        if (response.data.success) {
+          setUsers(
+            users.map((u) =>
+              u.id === id
+                ? {
+                    ...u,
+                    follow_date: "1",
+                  }
+                : u
+            )
+          );
+        }
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <>
@@ -78,26 +101,27 @@ const Homepage = () => {
           <h2 className="margin-b">Add to your feed</h2>
           <div className="users">
             {users.map((user) => {
-              const { id, name, is_company } = user;
+              const { id, name, is_company, follow_date } = user;
               return (
-                <div className="user">
+                <div className="user" key={id}>
                   <Link to={`/profile/${id}`} className="user">
-                    <Avatar
-                      size={54}
-                      imgSize={28}
-                      is_company={is_company !== "1" ? false : true}
-                    />
+                    <Avatar size={54} imgSize={28} is_company={is_company} />
                     <div>
                       <p>{name ?? "Anonymous"}</p>
                       <p className="text-sm">
-                        {is_company === "1" ? "Company" : ""}
+                        {is_company === 1 ? "Company" : ""}
                       </p>
                     </div>
                   </Link>
-                  <button className="button button-outlined button-outlined-primary button-small">
-                    <FaPlus />
-                    Follow
-                  </button>
+                  {!follow_date && (
+                    <button
+                      className="button button-outlined button-outlined-primary button-small"
+                      onClick={() => follow(id)}
+                    >
+                      <FaPlus />
+                      Follow
+                    </button>
+                  )}
                 </div>
               );
             })}

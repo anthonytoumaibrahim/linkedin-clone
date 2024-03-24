@@ -64,7 +64,7 @@ const Homepage = () => {
 
   return (
     <>
-      <NewPost name={user?.name} id={user?.id} />
+      <NewPost name={user?.name} id={user?.id} is_company={user?.is_company} />
       <section className="margin-y discover-section">
         <div className="cols-2">
           <h2 className="margin-b">Your feed</h2>

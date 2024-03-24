@@ -11,7 +11,7 @@ import "./styles.css";
 // Components
 import Modal from "../../../components/Modal";
 
-const NewPost = ({ name = "Anonymous", id = 0 }) => {
+const NewPost = ({ name = "Anonymous", id = 0, is_company = false }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [postContent, setPostContent] = useState("");
@@ -48,7 +48,11 @@ const NewPost = ({ name = "Anonymous", id = 0 }) => {
       {isModalOpen && (
         <Modal close={() => setIsModalOpen(false)}>
           <div className="flex align-center gap margin-b">
-            <Avatar size={64} imgSize={32} />
+            <Avatar
+              size={64}
+              imgSize={32}
+              is_company={is_company === 1 ? true : false}
+            />
             <h3>{name}</h3>
           </div>
           <form action="" className="post-form" onSubmit={submitPost}>
@@ -75,7 +79,11 @@ const NewPost = ({ name = "Anonymous", id = 0 }) => {
         </Modal>
       )}
       <div className="create-post-container">
-        <Avatar size={64} imgSize={32} />
+        <Avatar
+          size={64}
+          imgSize={32}
+          is_company={is_company === 1 ? true : false}
+        />
         <button
           className="button button-outlined"
           onClick={() => setIsModalOpen(true)}

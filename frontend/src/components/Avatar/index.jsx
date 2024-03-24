@@ -14,7 +14,13 @@ const Avatar = ({
   return (
     <div
       className="profile-image"
-      style={{ width: `${size}px`, height: `${size}px` }}
+      style={{
+        width: `${size}px`,
+        height: `${size}px`,
+        backgroundColor: is_company
+          ? "var(--primary-lighter-col)"
+          : "var(--primary-lightest-col)",
+      }}
     >
       <img src={is_company ? avatar_company : avatar_user} width={imgSize} />
     </div>

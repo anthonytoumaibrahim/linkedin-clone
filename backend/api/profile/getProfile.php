@@ -2,6 +2,7 @@
 require_once("../../config.php");
 
 $profileId = $_GET['id'] ?? 0;
+$viewerId = $_GET['viewerId'] ?? 0;
 
 $query = $mysqli->prepare("SELECT id, name, email, is_company, biography, education, skills FROM users WHERE id = ?");
 $query->bind_param("i", $profileId);
@@ -23,6 +24,19 @@ $skills = json_decode($skills ?? "[]", true);
 $query = $mysqli->query("SELECT id, content, created_at FROM posts WHERE user_id={$id}");
 $posts = $query->fetch_all(MYSQLI_ASSOC);
 
+// Check if following
+$follow_query = $mysqli->prepare("SELECT * FROM followers WHERE follower_id = ? AND following_id = ?");
+$follow_query->bind_param("ii", $viewerId, $id);
+$follow_query->execute();
+$follow_query->store_result();
+$frows = $follow_query->num_rows();
+
+$is_following = false;
+if ($frows > 0) {
+  $is_following = true;
+}
+
+
 echo response(true, "Profile found", [
   "id" => $id,
   "name" => $name,
@@ -31,5 +45,6 @@ echo response(true, "Profile found", [
   "biography" => $biography,
   "education" => $education,
   "skills" => $skills,
-  "posts" => $posts
+  "posts" => $posts,
+  "is_following" => $is_following
 ]);

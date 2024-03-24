@@ -18,7 +18,7 @@ import Avatar from "../../components/Avatar";
 
 // Icons
 import { CiEdit } from "react-icons/ci";
-import { FaUserPlus } from "react-icons/fa";
+import { FaUserPlus, FaUserMinus } from "react-icons/fa";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -42,7 +42,11 @@ const Profile = () => {
     setIsOwner(shownId === user.id ? true : false);
     axios
       .get(
-        process.env.REACT_APP_API_URL + "/profile/getProfile.php?id=" + shownId
+        process.env.REACT_APP_API_URL +
+          "/profile/getProfile.php?id=" +
+          shownId +
+          "&viewerId=" +
+          user.id
       )
       .then((response) => {
         setShownProfile(response.data.data);
@@ -51,6 +55,22 @@ const Profile = () => {
         console.log(error);
       });
   }, [shownId]);
+
+  const followUser = () => {
+    axios
+      .post(process.env.REACT_APP_API_URL + "/profile/follow.php", {
+        id: user.id,
+        follow_id: shownProfile.id,
+      })
+      .then((response) => {
+        const { unfollow } = response.data.data;
+        setShownProfile({
+          ...shownProfile,
+          is_following: !unfollow,
+        });
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <div className="profile-card">
       <div className="profile-cover">
@@ -72,8 +92,24 @@ const Profile = () => {
               <CiEdit /> Edit Profile
             </Link>
           ) : (
-            <button className="button button-primary button-small follow-button">
-              <FaUserPlus /> Follow
+            <button
+              className={`button ${
+                shownProfile?.is_following
+                  ? "button-outlined button-outlined-primary"
+                  : "button-primary"
+              } button-small follow-button`}
+              onClick={followUser}
+            >
+              {shownProfile?.is_following ? (
+                <>
+                  <FaUserMinus />
+                  Unfollow
+                </>
+              ) : (
+                <>
+                  <FaUserPlus /> Follow
+                </>
+              )}
             </button>
           )}
         </h1>

@@ -24,3 +24,12 @@
 .italic {
   font-style: italic;
 }
+.flex {
+  display: flex;
+}
+.align-center {
+  align-items: center;
+}
+.gap {
+  gap: 10px;
+}

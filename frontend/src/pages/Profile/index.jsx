@@ -49,7 +49,7 @@ const Profile = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [shownId]);
   return (
     <div className="profile-card">
       <div className="profile-cover">

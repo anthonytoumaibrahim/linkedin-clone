@@ -127,6 +127,31 @@ const Profile = () => {
             </div>
           )}
         </div>
+
+        <section className="margin-y">
+          <h2 className="margin-b">Latest Posts</h2>
+          <section className="posts">
+            {shownProfile?.posts?.map((post) => {
+              const { id, content, created_at } = post;
+              return (
+                <div key={id} className="post">
+                  <div className="post-header">
+                    <Avatar
+                      size={64}
+                      imgSize={32}
+                      is_company={shownProfile?.is_company}
+                    />
+                    <div className="post-info">
+                      <h4>{shownProfile?.name}</h4>
+                      <p className="date">{created_at}</p>
+                    </div>
+                  </div>
+                  <div className="post-content">{content}</div>
+                </div>
+              );
+            })}
+          </section>
+        </section>
       </div>
     </div>
   );

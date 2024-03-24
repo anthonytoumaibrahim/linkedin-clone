@@ -19,6 +19,10 @@ $query->fetch();
 $education = json_decode($education ?? "[]", true);
 $skills = json_decode($skills ?? "[]", true);
 
+// Get posts
+$query = $mysqli->query("SELECT id, content, created_at FROM posts WHERE user_id={$id}");
+$posts = $query->fetch_all(MYSQLI_ASSOC);
+
 echo response(true, "Profile found", [
   "id" => $id,
   "name" => $name,
@@ -26,5 +30,6 @@ echo response(true, "Profile found", [
   "is_company" => $isCompany,
   "biography" => $biography,
   "education" => $education,
-  "skills" => $skills
+  "skills" => $skills,
+  "posts" => $posts
 ]);

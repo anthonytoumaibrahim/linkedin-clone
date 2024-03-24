@@ -9,14 +9,12 @@ import { AuthContext } from "../../context/AuthContext";
 // Assets
 import profile_cover_user from "../../assets/images/profile-covers/user.jpg";
 import profile_cover_company from "../../assets/images/profile-covers/company.jpg";
-import avatar_user from "../../assets/images/icons/user.svg";
-import avatar_company from "../../assets/images/icons/company.svg";
 
 // Styles
 import "./styles.css";
 
 // Components
-import NewPost from "./components/NewPost";
+import Avatar from "../../components/Avatar";
 
 // Icons
 import { CiEdit } from "react-icons/ci";
@@ -62,9 +60,7 @@ const Profile = () => {
               : profile_cover_user
           }
         />
-        <div className="profile-image">
-          <img src={shownProfile?.is_company ? avatar_company : avatar_user} />
-        </div>
+        <Avatar is_company={shownProfile?.is_company} />
       </div>
 
       <div className="profile-content">
@@ -131,8 +127,6 @@ const Profile = () => {
             </div>
           )}
         </div>
-
-        {isOwner && <NewPost />}
       </div>
     </div>
   );

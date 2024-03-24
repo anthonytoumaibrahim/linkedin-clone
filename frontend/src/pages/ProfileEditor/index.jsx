@@ -14,6 +14,7 @@ import "./styles.css";
 
 // Components
 import Skills from "./Components/Skills";
+import Education from "./Components/Education";
 
 const ProfileEditor = () => {
   const navigate = useNavigate();
@@ -137,68 +138,18 @@ const ProfileEditor = () => {
             </div>
             <div className="form-input-wrapper margin-b">
               <label>Education</label>
-              <div className="education">
-                <input
-                  type="text"
-                  className="form-input"
-                  placeholder="School/University Name"
-                  value={userInfo.education?.school}
-                  onChange={(e) =>
-                    setUserInfo({
-                      ...userInfo,
-                      education: {
-                        ...userInfo.education,
-                        school: e.target.value,
-                      },
-                    })
-                  }
-                />
-                <input
-                  type="text"
-                  className="form-input"
-                  placeholder="Field of Study"
-                  value={userInfo.education?.field}
-                  onChange={(e) =>
-                    setUserInfo({
-                      ...userInfo,
-                      education: {
-                        ...userInfo.education,
-                        field: e.target.value,
-                      },
-                    })
-                  }
-                />
-                <input
-                  type="number"
-                  className="form-input"
-                  placeholder="Year Started"
-                  value={userInfo.education?.start_year}
-                  onChange={(e) =>
-                    setUserInfo({
-                      ...userInfo,
-                      education: {
-                        ...userInfo.education,
-                        start_year: e.target.value,
-                      },
-                    })
-                  }
-                />
-                <input
-                  type="number"
-                  className="form-input"
-                  placeholder="Year Ended"
-                  value={userInfo.education?.end_year}
-                  onChange={(e) =>
-                    setUserInfo({
-                      ...userInfo,
-                      education: {
-                        ...userInfo.education,
-                        end_year: e.target.value,
-                      },
-                    })
-                  }
-                />
-              </div>
+              <Education
+                education={userInfo?.education}
+                update={(data) =>
+                  setUserInfo({
+                    ...userInfo,
+                    education: {
+                      ...userInfo.education,
+                      ...data,
+                    },
+                  })
+                }
+              />
             </div>
           </>
         )}

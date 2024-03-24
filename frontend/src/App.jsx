@@ -13,7 +13,8 @@ import "./styles/buttons.css";
 import "./styles/inputs.css";
 
 // Assets
-import logo from "./assets/images/logo.svg";
+import logo from "./assets/images/logo.png";
+import logo_in from "./assets/images/logo_in.png";
 
 // React Router
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
@@ -27,6 +28,10 @@ import ProfileEditor from "./pages/ProfileEditor";
 // Utilities
 import { getLocalUser, removeLocalUser } from "./utils/user";
 
+// Icons
+import { IoHomeSharp } from "react-icons/io5";
+import { FaUser } from "react-icons/fa";
+
 const App = () => {
   const localUser = getLocalUser();
   const [user, setUser] = useState({
@@ -39,13 +44,29 @@ const App = () => {
   return (
     <AuthContext.Provider value={{ user, setUser }}>
       <BrowserRouter>
-        <header className="site-header container">
-          <img src={logo} alt="LinkedIn" />
+        <header
+          className={`site-header container ${
+            user.id !== 0 ? "logged-in" : ""
+          }`}
+        >
+          <Link to="/">
+            {user.id === 0 ? (
+              <img src={logo} alt="LinkedIn" />
+            ) : (
+              <img src={logo_in} alt="LinkedIn" />
+            )}
+          </Link>
           <nav className="site-nav">
             {user.id !== 0 ? (
               <>
-                <Link to="/">Home</Link>
-                <Link to="/profile">Profile</Link>
+                <Link to="/" className="nav-link">
+                  <IoHomeSharp size={24} />
+                  Home
+                </Link>
+                <Link to="/profile" className="nav-link">
+                  <FaUser size={24} />
+                  Profile
+                </Link>
                 <Link
                   className="button button-outlined button-outlined-error"
                   to="/auth"

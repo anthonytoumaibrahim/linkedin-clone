@@ -8,6 +8,9 @@ import { AuthContext } from "../../context/AuthContext";
 // Styles
 import "./styles.css";
 
+// Components
+import NewPost from "./components/NewPost";
+
 const Homepage = () => {
   const navigate = useNavigate();
   const { user, setUser } = useContext(AuthContext);
@@ -20,7 +23,7 @@ const Homepage = () => {
 
   return (
     <>
-      <div className="create-post-container"></div>
+      <NewPost />
     </>
   );
 };

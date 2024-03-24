@@ -5,11 +5,32 @@
   min-height: 80px;
   margin-bottom: 40px;
 }
+.site-header.logged-in {
+  background-color: #ffffff;
+}
 .site-header img {
   max-width: 132px;
+}
+.site-header.logged-in img {
+  width: 48px;
 }
 .site-nav {
   display: flex;
   align-items: center;
   gap: 10px;
+}
+.logged-in .site-nav {
+  gap: 30px;
+}
+.nav-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: #3f3f3f;
+}
+.nav-link:hover {
+  color: #000000;
+  text-decoration: none;
 }

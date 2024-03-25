@@ -26,13 +26,20 @@ const FindJob = () => {
   }, [user]);
 
   const [jobs, setJobs] = useState([]);
+  const [loadingState, setLoadingState] = useState(
+    "Please wait, loading jobs..."
+  );
 
   // Get jobs
   useEffect(() => {
     axios
       .get(process.env.REACT_APP_API_URL + "/jobs/get.php?id=" + user.id)
       .then((response) => {
-        setJobs(response.data.data.jobs);
+        const loadedJobs = response.data.data.jobs;
+        setJobs(loadedJobs);
+        if (loadedJobs.length === 0) {
+          setLoadingState("There are no job postings yet.");
+        }
       })
       .catch((error) => console.log(error));
   }, []);
@@ -40,6 +47,7 @@ const FindJob = () => {
   return (
     <>
       <h2 className="margin-b">Latest Jobs</h2>
+      {jobs.length === 0 && <p>{loadingState}</p>}
       <div className="posts">
         {jobs.map((job) => {
           const {

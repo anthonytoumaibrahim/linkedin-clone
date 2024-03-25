@@ -3,6 +3,8 @@
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: *");
 
+sleep(2);
+
 $db_host = "localhost";
 $db_user = "root";
 $db_pass = "root";

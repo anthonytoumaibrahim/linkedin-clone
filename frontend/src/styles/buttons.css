@@ -46,9 +46,14 @@
 }
 .button-primary {
   background-color: var(--primary-col);
-  color: #fff;
+  color: #fff !important;
   border-color: transparent;
 }
 .button-primary:not(:disabled):hover {
   background-color: var(--primary-dark-col);
+}
+.button-icon {
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
 }

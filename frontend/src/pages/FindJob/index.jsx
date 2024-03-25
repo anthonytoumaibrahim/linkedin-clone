@@ -12,6 +12,9 @@ import "./styles.css";
 // Components
 import Avatar from "../../components/Avatar";
 
+// Icons
+import { AiOutlineMail } from "react-icons/ai";
+
 const FindJob = () => {
   const navigate = useNavigate();
   const { user, setUser } = useContext(AuthContext);
@@ -46,6 +49,7 @@ const FindJob = () => {
             company_id,
             created_at,
             company_name,
+            email,
           } = job;
 
           return (
@@ -60,7 +64,13 @@ const FindJob = () => {
               <div className="post-content">
                 <h1 className="margin-b">{title}</h1>
                 <p className="margin-b">{description}</p>
-                <button className="button button-primary">Apply Now</button>
+                <a
+                  href={`mailto:${email}`}
+                  className="button button-primary button-icon"
+                >
+                  <AiOutlineMail size={24} />
+                  Apply Now
+                </a>
               </div>
             </div>
           );

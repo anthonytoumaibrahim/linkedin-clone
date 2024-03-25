@@ -88,7 +88,9 @@ const SignupForm = () => {
     }
     button.current.disabled = true;
     axios
-      .post(process.env.REACT_APP_API_URL + "/auth/signup.php", requestData)
+      .post(process.env.REACT_APP_API_URL + "/auth/signup.php", requestData, {
+        withCredentials: true,
+      })
       .then((response) => {
         const { success, message, data } = response.data;
         setResponse({

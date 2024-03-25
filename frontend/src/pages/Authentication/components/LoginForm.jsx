@@ -28,10 +28,16 @@ const LoginForm = () => {
     event.preventDefault();
     button.current.disabled = true;
     axios
-      .post(process.env.REACT_APP_API_URL + "/auth/login.php", {
-        email: credentials.email,
-        password: credentials.password,
-      })
+      .post(
+        process.env.REACT_APP_API_URL + "/auth/login.php",
+        {
+          email: credentials.email,
+          password: credentials.password,
+        },
+        {
+          withCredentials: true,
+        }
+      )
       .then((response) => {
         const { success, message, data } = response.data;
         setResponse({
@@ -44,7 +50,7 @@ const LoginForm = () => {
             id: data.id,
             name: data.name,
             email: data.email,
-            is_company: data.is_company
+            is_company: data.is_company,
           });
           setLocalUser(data.id, data.name, data.email, data.is_company);
           return navigate("/");

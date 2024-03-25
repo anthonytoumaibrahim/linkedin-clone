@@ -18,6 +18,19 @@ if (strlen($password) < 8) {
   exit(response(false, "Please enter a valid password."));
 }
 
+// Take name from email
+if (!$isCompany) {
+  $name = "";
+  $extract_name = explode("@", $email);
+  $name = $extract_name[0] ?? "Anonymous";
+  // Replace dots or dashes
+  $name = str_replace([".", "_"], " ", $name);
+  // Remove numbers
+  $name = preg_replace('/\d/', '', $name);
+  // Capitalize
+  $name = ucwords($name);
+}
+
 // Check if email is taken
 $check_query = $mysqli->prepare("SELECT email FROM users WHERE email=?");
 $check_query->bind_param("s", $email);

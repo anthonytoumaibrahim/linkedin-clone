@@ -24,13 +24,15 @@ import Authentication from "./pages/Authentication";
 import Homepage from "./pages/Homepage";
 import Profile from "./pages/Profile";
 import ProfileEditor from "./pages/ProfileEditor";
+import PostJob from "./pages/PostJob";
+import FindJob from "./pages/FindJob";
 
 // Utilities
 import { getLocalUser, removeLocalUser } from "./utils/user";
 
 // Icons
 import { IoHomeSharp } from "react-icons/io5";
-import { FaUser } from "react-icons/fa";
+import { FaUser, FaSuitcase } from "react-icons/fa";
 
 const App = () => {
   const localUser = getLocalUser();
@@ -66,6 +68,10 @@ const App = () => {
                 <Link to="/profile" className="nav-link">
                   <FaUser size={24} />
                   Profile
+                </Link>
+                <Link to="/jobs" className="nav-link">
+                  <FaSuitcase size={24} />
+                  {user.is_company ? "Post Jobs" : "Find Jobs"}
                 </Link>
                 <Link
                   className="button button-outlined button-outlined-error"
@@ -104,6 +110,10 @@ const App = () => {
             <Route path="/auth" element={<Authentication />} />
             <Route path="/profile/:shownId?" element={<Profile />} />
             <Route path="/edit-profile" element={<ProfileEditor />} />
+            <Route
+              path="/jobs"
+              element={user.is_company ? <PostJob /> : <FindJob />}
+            />
           </Routes>
         </main>
       </BrowserRouter>

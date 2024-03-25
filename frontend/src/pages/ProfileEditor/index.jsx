@@ -110,13 +110,19 @@ const ProfileEditor = () => {
           />
         </div>
         <div className="form-input-wrapper margin-b">
-          <label htmlFor="bio">Biography</label>
+          <label htmlFor="bio">
+            {user.is_company ? "About Company" : "Biography"}
+          </label>
           <textarea
             id="bio"
             cols="30"
             rows="10"
             className="form-input"
-            placeholder="Write your biography. You can outline your work experience, skills, hobbies, and whatever comes to mind!"
+            placeholder={
+              user.is_company
+                ? "Write a description of your company!"
+                : "Write your biography. You can outline your work experience, skills, hobbies, and whatever comes to mind!"
+            }
             value={userInfo.bio}
             onChange={(e) =>
               setUserInfo({

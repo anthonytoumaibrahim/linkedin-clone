@@ -54,3 +54,11 @@
   align-items: center;
   gap: 5px;
 }
+@media (max-width: 1024px) {
+  .discover-section {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+  .discover-section > div:nth-child(1) {
+    order: 2;
+  }
+}

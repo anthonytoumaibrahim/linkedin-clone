@@ -1,12 +1,10 @@
 <?php
 require_once("../../config.php");
 
-$data = jsonPost();
-
-$name = $data['name'] ?? null;
-$email = $data['email'] ?? "";
-$password = $data['password'] ?? "";
-$isCompany = $data['is_company'] ?? false;
+$name = $_POST['name'] ?? null;
+$email = $_POST['email'] ?? "";
+$password = $_POST['password'] ?? "";
+$isCompany = $_POST['is_company'] ?? false;
 
 if ($isCompany && trim($name) === "") {
   exit(response(false, "Please enter a company name."));

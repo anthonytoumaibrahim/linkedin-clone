@@ -1,10 +1,8 @@
 <?php
 require_once("../../config.php");
 
-$data = jsonPost();
-
-$email = $data['email'] ?? "";
-$password = $data['password'] ?? "";
+$email = $_POST['email'] ?? "";
+$password = $_POST['password'] ?? "";
 
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
   exit(response(false, "Please enter a valid email address."));

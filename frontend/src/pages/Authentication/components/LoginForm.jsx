@@ -35,7 +35,9 @@ const LoginForm = () => {
           password: credentials.password,
         },
         {
-          withCredentials: true,
+          headers: {
+            "content-type": "application/x-www-form-urlencoded",
+          },
         }
       )
       .then((response) => {

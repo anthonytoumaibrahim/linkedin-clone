@@ -1,11 +1,9 @@
 <?php
 require_once("../../config.php");
 
-$data = jsonPost();
-
-$company_id = $data['company_id'] ?? 0;
-$title = $data['title'] ?? "";
-$desc = $data['description'] ?? "";
+$company_id = $_POST['company_id'] ?? 0;
+$title = $_POST['title'] ?? "";
+$desc = $_POST['description'] ?? "";
 
 // Validation
 if ($company_id === 0) {

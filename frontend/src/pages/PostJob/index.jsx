@@ -32,11 +32,19 @@ const PostJob = () => {
   const submit = (e) => {
     e.preventDefault();
     axios
-      .post(process.env.REACT_APP_API_URL + "/jobs/post.php", {
-        company_id: user.id,
-        title: jobDetails.title,
-        description: jobDetails.description,
-      })
+      .post(
+        process.env.REACT_APP_API_URL + "/jobs/post.php",
+        {
+          company_id: user.id,
+          title: jobDetails.title,
+          description: jobDetails.description,
+        },
+        {
+          headers: {
+            "content-type": "application/x-www-form-urlencoded",
+          },
+        }
+      )
       .then((response) => {
         setResponse({
           success: response.data.success,

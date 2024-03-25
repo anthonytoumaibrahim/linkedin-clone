@@ -57,10 +57,18 @@ const Profile = () => {
 
   const followUser = () => {
     axios
-      .post(process.env.REACT_APP_API_URL + "/profile/follow.php", {
-        id: user.id,
-        follow_id: shownProfile.id,
-      })
+      .post(
+        process.env.REACT_APP_API_URL + "/profile/follow.php",
+        {
+          id: user.id,
+          follow_id: shownProfile.id,
+        },
+        {
+          headers: {
+            "content-type": "application/x-www-form-urlencoded",
+          },
+        }
+      )
       .then((response) => {
         const { unfollow } = response.data.data;
         setShownProfile({

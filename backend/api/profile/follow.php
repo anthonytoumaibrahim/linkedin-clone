@@ -1,9 +1,8 @@
 <?php
 require_once("../../config.php");
 
-$data = jsonPost();
-$id = $data['id'] ?? 0;
-$follow_id = $data['follow_id'] ?? 0;
+$id = $_POST['id'] ?? 0;
+$follow_id = $_POST['follow_id'] ?? 0;
 
 if ($id === 0 || $follow_id === 0) {
   exit(response(false, "Invalid data."));

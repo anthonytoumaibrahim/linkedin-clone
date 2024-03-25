@@ -45,10 +45,18 @@ const Homepage = () => {
 
   const follow = (id) => {
     axios
-      .post(process.env.REACT_APP_API_URL + "/profile/follow.php", {
-        id: user.id,
-        follow_id: id,
-      })
+      .post(
+        process.env.REACT_APP_API_URL + "/profile/follow.php",
+        {
+          id: user.id,
+          follow_id: id,
+        },
+        {
+          headers: {
+            "content-type": "application/x-www-form-urlencoded",
+          },
+        }
+      )
       .then((response) => {
         if (response.data.success) {
           getPosts();

@@ -24,10 +24,18 @@ const NewPost = ({ name = "Anonymous", id = 0, is_company = false }) => {
   const submitPost = (e) => {
     e.preventDefault();
     axios
-      .post(process.env.REACT_APP_API_URL + "/post/create.php", {
-        id: id,
-        content: postContent,
-      })
+      .post(
+        process.env.REACT_APP_API_URL + "/post/create.php",
+        {
+          id: id,
+          content: postContent,
+        },
+        {
+          headers: {
+            "content-type": "application/x-www-form-urlencoded",
+          },
+        }
+      )
       .then((response) => {
         const { success, message } = response.data;
         setResponse({

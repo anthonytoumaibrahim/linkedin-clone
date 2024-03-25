@@ -1,10 +1,8 @@
 <?php
 require_once("../../config.php");
 
-$data = jsonPost();
-
-$id = $data['id'] ?? 0;
-$content = $data['content'] ?? "";
+$id = $_POST['id'] ?? 0;
+$content = $_POST['content'] ?? "";
 
 if ($id === 0) {
   exit(response(false, "Invalid user ID."));

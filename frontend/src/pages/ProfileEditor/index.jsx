@@ -62,10 +62,18 @@ const ProfileEditor = () => {
   const saveProfile = (e) => {
     e.preventDefault();
     axios
-      .post(process.env.REACT_APP_API_URL + "/profile/saveProfile.php", {
-        id: user.id,
-        ...userInfo,
-      })
+      .post(
+        process.env.REACT_APP_API_URL + "/profile/saveProfile.php",
+        {
+          id: user.id,
+          ...userInfo,
+        },
+        {
+          headers: {
+            "content-type": "application/x-www-form-urlencoded",
+          },
+        }
+      )
       .then((response) => {
         const { success, message } = response.data;
         setResponse({

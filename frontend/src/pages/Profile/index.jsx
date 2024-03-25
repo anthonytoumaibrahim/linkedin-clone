@@ -25,7 +25,6 @@ const Profile = () => {
   const { user, setUser } = useContext(AuthContext);
 
   const [shownProfile, setShownProfile] = useState({});
-
   useEffect(() => {
     if (user.id === 0) {
       navigate("/auth");

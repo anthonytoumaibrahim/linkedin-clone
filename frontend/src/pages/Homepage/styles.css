@@ -21,6 +21,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  white-space: pre-line;
 }
 .post-header {
   display: flex;

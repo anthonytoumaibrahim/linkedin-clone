@@ -9,6 +9,9 @@ import { AuthContext } from "../../context/AuthContext";
 // Styles
 import "./styles.css";
 
+// Components
+import Avatar from "../../components/Avatar";
+
 const FindJob = () => {
   const navigate = useNavigate();
   const { user, setUser } = useContext(AuthContext);
@@ -19,7 +22,52 @@ const FindJob = () => {
     }
   }, [user]);
 
-  return <div>find job</div>;
+  const [jobs, setJobs] = useState([]);
+
+  // Get jobs
+  useEffect(() => {
+    axios
+      .get(process.env.REACT_APP_API_URL + "/jobs/get.php?id=" + user.id)
+      .then((response) => {
+        setJobs(response.data.data.jobs);
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
+  return (
+    <>
+      <h2 className="margin-b">Latest Jobs</h2>
+      <div className="posts">
+        {jobs.map((job) => {
+          const {
+            id,
+            title,
+            description,
+            company_id,
+            created_at,
+            company_name,
+          } = job;
+
+          return (
+            <div className="post" key={id}>
+              <Link to={`/profile/${company_id}`} className="post-header">
+                <Avatar size={64} imgSize={32} is_company={true} />
+                <div className="post-info">
+                  <h4>{company_name}</h4>
+                  <p className="date">{created_at}</p>
+                </div>
+              </Link>
+              <div className="post-content">
+                <h1 className="margin-b">{title}</h1>
+                <p className="margin-b">{description}</p>
+                <button className="button button-primary">Apply Now</button>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </>
+  );
 };
 
 export default FindJob;
